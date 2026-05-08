@@ -8,7 +8,7 @@ param location string = 'East US'
 param appServicePlanName string = '${appName}-plan'
 
 @description('SKU for the App Service Plan')
-param sku string = 'B1'
+param sku string = 'F1'
 
 @description('Runtime stack for the Web App')
 param runtimeStack string = 'DOTNETCORE|8.0'
