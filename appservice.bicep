@@ -2,7 +2,7 @@
 param appName string
 
 @description('Location for the resources')
-param location string = 'East US'
+param location string = 'West US 2'
 
 @description('Name of the App Service Plan')
 param appServicePlanName string = '${appName}-plan'

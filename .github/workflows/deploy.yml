@@ -34,11 +34,14 @@ jobs:
         dotnet build --configuration Release
         dotnet publish -c Release -o ./publish
 
+    - name: Create resource group
+      run: az group create --name bicep-rg-westus2 --location westus2 --only-show-errors
+
     - name: Deploy Bicep template
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        resourceGroupName: bicep-rg
+        resourceGroupName: bicep-rg-westus2
         template: ./appservice.bicep
         parameters: ./appservice.params.json
         deploymentName: deploy-${{ github.run_number }}
