@@ -11,11 +11,8 @@
     "appServicePlanName": {
       "value": "dotnetwebapplication-plan"
     },
-    "sku": {
-      "value": "F1"
-    },
     "runtimeStack": {
-      "value": "DOTNETCORE|8.0"
+      "value": "DOTNET|8.0"
     }
   }
 }

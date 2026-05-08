@@ -46,8 +46,8 @@ jobs:
         parameters: ./appservice.params.json
         deploymentName: deploy-${{ github.run_number }}
 
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v3
+    - name: Deploy to Azure Function App
+      uses: azure/functions-action@v1
       with:
         app-name: dotnetwebapplication
         slot-name: production

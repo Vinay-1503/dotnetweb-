@@ -1,4 +1,4 @@
-@description('Name of the Azure Web App')
+@description('Name of the Azure Function App')
 param appName string
 
 @description('Location for the resources')
@@ -7,26 +7,27 @@ param location string = 'West US 2'
 @description('Name of the App Service Plan')
 param appServicePlanName string = '${appName}-plan'
 
-@description('SKU for the App Service Plan')
-param sku string = 'F1'
+@description('Runtime stack for the Function App')
+param runtimeStack string = 'DOTNET|8.0'
 
-@description('Runtime stack for the Web App')
-param runtimeStack string = 'DOTNETCORE|8.0'
-
-// App Service Plan
+// App Service Plan (Consumption Plan for Functions)
 resource appServicePlan 'Microsoft.Web/serverfarms@2023-12-01' = {
   name: appServicePlanName
   location: location
   sku: {
-    name: sku
+    name: 'Y1'
+    tier: 'Dynamic'
   }
-  properties: {}
+  properties: {
+    maximumElasticWorkerCount: 5
+  }
 }
 
-// Web App
-resource webApp 'Microsoft.Web/sites@2023-12-01' = {
+// Function App
+resource functionApp 'Microsoft.Web/sites@2023-12-01' = {
   name: appName
   location: location
+  kind: 'functionapp'
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
